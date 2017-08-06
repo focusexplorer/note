@@ -1,0 +1,13 @@
+#fix_head{
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+}
+#scroll_content * {
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+		/* font-style:italic; */
+		font-size:1em;
+}
+
+.aim {
+	 line-height:1.3em; 
+}

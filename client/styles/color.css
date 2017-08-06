@@ -1,0 +1,9 @@
+#scroll_content {
+	background-color:none; 
+}
+.date,.level ,.complete ,.delete, .aim {
+	background-color:none; 
+}
+.date{
+	background-color:white; 
+}
