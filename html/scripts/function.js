@@ -1,6 +1,30 @@
 window.onload=function()
 {
 	fget();
+	
+	// var b=document.getElementById("save");
+	// b.addEventListener("input",function(){
+		// this.style.color="red";
+	// });
+	// b.addEventListener("propertychange",function(){
+		// this.style.color="red";
+	// });
+
+	
+	
+	var ta=document.getElementById("whole_txt");
+	// ta.addEventListener("input",function(){
+		// document.getElementById("save").style.color="red";
+	// });
+	// ta.addEventListener("propertychange",function(){
+		// document.getElementById("save").style.color="red";
+	// });	
+	ta.oninput=function(){
+		document.getElementById("save").style.color="red";
+	};
+	ta.onpropertychange=function(){
+		document.getElementById("save").style.color="red";
+	};
 }
 function fget()
 {
@@ -16,7 +40,7 @@ function fget()
 			ta.value=xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("POST","get_from_mysql.php",false);
+	xmlhttp.open("POST","db/get_from_mysql.php",false);
 	xmlhttp.send("");
 }
 function fsave()
@@ -31,9 +55,11 @@ function fsave()
 		{
 			console.log("server response:"+xmlhttp.responseText);
 			// var t=window.JSON.parse(xmlhttp.responseText);
+			var b=document.getElementById("save");
+			b.style.color="green";
 		}
 	}
-	xmlhttp.open("POST","add_to_mysql.php",false);
+	xmlhttp.open("POST","db/add_to_mysql.php",false);
 	xmlhttp.send(ta.value);
 }
 
