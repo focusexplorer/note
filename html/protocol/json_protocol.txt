@@ -1,0 +1,40 @@
+//.
+{
+	"version":"xxx",
+	"command":"xxx",//login,register,get_data,push_data
+	"data":{xxx}
+}
+//command
+cmd_get_data_req
+cmd_get_data_rsp
+
+cmd_push_data_req
+cmd_push_data_rsp
+
+//login
+"data":{
+	"user_name","xxx",
+	"user_password","xxx"
+}
+
+//register
+"data":{
+	"user_name":"xxx",
+	"user_password":"xxx",
+	"mail":"xxx"
+}
+//get_data
+"get_data_rsp":{
+	"touch_time":"xxx",
+	"text":"xxx"
+}
+
+//push_data
+"push_data_req":{
+	"touch_time":"xxx",
+	"text":"xxx"
+}
+"push_data_rsp":{
+	"error":"xxx",
+	"touch_time":"xxx",
+}
