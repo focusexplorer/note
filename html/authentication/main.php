@@ -8,6 +8,7 @@ if(!isset($_SESSION['valid_user']))
 ?>
 <html>
 <head>
+	<meta charset="utf-8"></meta>
 </head>
 <body>
 the world is changing dynamic and unique

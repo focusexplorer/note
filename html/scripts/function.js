@@ -20,12 +20,18 @@ window.onload=function()
 		// document.getElementById("save").style.color="red";
 	// });	
 	ta.oninput=function(){
-		document.getElementById("save").style.color="red";
+		NEED_SAVE=true;
 	};
 	ta.onpropertychange=function(){
-		document.getElementById("save").style.color="red";
+		NEED_SAVE=true;
 	};
+	ta.onblur=fsave;
+
+	document.getElementsByTagName("body")[0].onbeforeunload=fsave;
+	setInterval(fsave,10000);
+	
 }
+
 function fget()
 {
 	var xmlhttp=get_xmlhttp();
@@ -37,12 +43,25 @@ function fget()
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
+			if(xmlhttp.responseText=='not login')
+			{
+				// window.location.href=curWwwPath.substring(0.pos)+'authentication/login.html';
+				window.location.href='authentication/login.html';
+				// window.location.href='index.html';//this will lead to dead loop
+				return;
+			}
 			console.log("get sever plan:"+xmlhttp.responseText);
 			var r=window.JSON.parse(xmlhttp.responseText);
+			if(r.error==null)
+			{
+				var ta=document.getElementById("whole_txt");
+				ta.value=r.get_data_rsp.text;
+				TOUCH_TIME=r.get_data_rsp.touch_time;
+			}
+			else{
+				document.getElementById("whole_txt").value=r.error;
+			}
 			
-			var ta=document.getElementById("whole_txt");
-			ta.value=r.get_data_rsp.text;
-			TOUCH_TIME=r.get_data_rsp.touch_time;
 		}
 	}
 	xmlhttp.open("POST","db/get_from_mysql.php",false);
@@ -50,6 +69,12 @@ function fget()
 }
 function fsave()
 {
+	if(!NEED_SAVE)
+	{
+		// console.log("has saved, no need to save again");
+		return ;
+	}
+	
 	var ta=document.getElementById("whole_txt");
 	console.log(ta.value);
 	var c=new Object();
@@ -65,16 +90,22 @@ function fsave()
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
+			if(xmlhttp.responseText=='not login')
+			{
+				window.location.href='../authentication/login.html';
+				return;
+			}
 			console.log("server response:"+xmlhttp.responseText);
 			var t=window.JSON.parse(xmlhttp.responseText);
 			if(t.error==null)
 			{
 				TOUCH_TIME=t.push_data_rsp.touch_time;
-				var b=document.getElementById("save");
-				b.style.color="green";
+				// var b=document.getElementById("save");
+				// b.style.color="green";
+				NEED_SAVE=false;
 			}
 			else{
-				document.getElementById("save").style.color='red';
+				// document.getElementById("save").style.color='red';
 				console.log(t.error);
 			}
 		}

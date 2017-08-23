@@ -2,9 +2,8 @@
 session_start();
 if(!isset($_SESSION['valid_user']))
 {
-	echo '<br/>the user hasn\'t login\n';
-	echo 'login to use text book';
-	// require("../authentication/login.php");
+	echo 'not login';
+	exit(-1);
 }
 
 //read data from post 

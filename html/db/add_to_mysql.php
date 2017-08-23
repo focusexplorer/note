@@ -2,8 +2,8 @@
 session_start();
 if(!isset($_SESSION['valid_user']))
 {
-	echo '<br/>the user hasn\'t login';
-	require("../authentication/login.php");
+	echo 'not login';
+	exit(0);
 }
 //read post
 $c=file_get_contents("php://input","r");

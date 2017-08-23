@@ -22,10 +22,10 @@ html
 	position:relative;
 	/* position:absolute; */
 	
-	margin-top:10%;
-	height:90%;
+	margin-top:10vh;
+	height:90vh;
 	
-	/* border:1px solid green; */
+	/* border:1px solid yellow; */
 }
 
 #note{
