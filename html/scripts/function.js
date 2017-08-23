@@ -1,7 +1,10 @@
+
+var TOUCH_TIME="";
+var LAST_GET_TIME=0;
+var NEED_SAVE=false;
+
 window.onload=function()
 {
-	fget();
-	
 	// var b=document.getElementById("save");
 	// b.addEventListener("input",function(){
 		// this.style.color="red";
@@ -25,15 +28,29 @@ window.onload=function()
 	ta.onpropertychange=function(){
 		NEED_SAVE=true;
 	};
-	ta.onblur=fsave;
-
-	document.getElementsByTagName("body")[0].onbeforeunload=fsave;
+	
+	ta.onblur=fsave;//save when save textarea
+	document.getElementsByTagName("body")[0].onbeforeunload=fsave;//save when close the web
 	setInterval(fsave,10000);
+	document.getElementsByTagName("body")[0].onpageshow=fget;//called when come back from a link
+	// document.getElementsByTagName("body")[0].onfocus=fget;//add get in case of someone edit the content from somewhere else
 	
 }
+window.onfocus=fget;//add get in case of someone edit the content from somewhere else
+
 
 function fget()
 {
+	//avoid too frequently get
+	var now=(new Date()).getTime();
+	if(now-LAST_GET_TIME<5000)
+	{
+		console.log("too frequently, last_get_time:",LAST_GET_TIME," now:",now);
+		return;
+	}
+	LAST_GET_TIME=now;
+		
+		
 	var xmlhttp=get_xmlhttp();
 	var c=new Object();
 	c.version=VERSION;
@@ -50,7 +67,7 @@ function fget()
 				// window.location.href='index.html';//this will lead to dead loop
 				return;
 			}
-			console.log("get sever plan:"+xmlhttp.responseText);
+			console.log("fget from server:"+xmlhttp.responseText);
 			var r=window.JSON.parse(xmlhttp.responseText);
 			if(r.error==null)
 			{
