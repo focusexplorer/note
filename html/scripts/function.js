@@ -5,14 +5,7 @@ var NEED_SAVE=false;
 
 window.onload=function()
 {
-	// var b=document.getElementById("save");
-	// b.addEventListener("input",function(){
-		// this.style.color="red";
-	// });
-	// b.addEventListener("propertychange",function(){
-		// this.style.color="red";
-	// });
-
+	document.getElementById('online_flag').style.visibility="hidden";
 	
 	
 	var ta=document.getElementById("whole_txt");
@@ -35,10 +28,20 @@ window.onload=function()
 	document.getElementsByTagName("body")[0].onpageshow=fget;//called when come back from a link
 	// document.getElementsByTagName("body")[0].onfocus=fget;//add get in case of someone edit the content from somewhere else
 	
+	setInterval(update,5000);
 }
 window.onfocus=fget;//add get in case of someone edit the content from somewhere else
 
-
+function update()
+{
+	if(navigator.onLine)
+	{
+		document.getElementById('online_flag').style.visibility="hidden";
+	}
+	else{
+		document.getElementById('online_flag').style.visibility="visible";
+	}
+}
 function fget()
 {
 	//avoid too frequently get
