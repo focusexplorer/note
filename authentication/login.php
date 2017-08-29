@@ -1,9 +1,9 @@
 <?php
 session_start();
-echo $_POST['mail'];
-echo '<br/>';
-echo $_POST['password'];
-echo '<br/>';
+// echo $_POST['mail'];
+// echo '<br/>';
+// echo $_POST['password'];
+// echo '<br/>';
 $dbc=new mysqli('localhost','root','','notebook');
 if(mysqli_connect_errno())
 {
@@ -14,7 +14,6 @@ $m=$dbc->escape_string($_POST['mail']);
 $p=$dbc->escape_string($_POST['password']);
 $query='select * from user_info where mail="'.$m.'" and password="'.$p.'";';
 $result=$dbc->query($query);
-echo '<br/>result:'.gettype($result);
 if(!$result)
 {
 	echo '<br/> query error';
@@ -28,8 +27,13 @@ if(!$result->num_rows)
 else
 {
 	$_SESSION['valid_user']=$_POST['mail'];
-	echo '<br/>login successfully';
+	// echo '<br/>login successfully';
 }	
-require('main.php');
+// require('main.php');
+// require('../paper.html');
+$url='../paper.html';
+Header("HTTP/1.1 303 See Other"); 
+Header("Location: $url"); 
+exit; //from www.w3sky.com 
 
 ?>

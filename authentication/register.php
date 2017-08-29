@@ -10,7 +10,7 @@ if(mysqli_connect_errno())
 }
 $m=$dbc->escape_string($_POST['mail']);
 $p=$dbc->escape_string($_POST['password']);
-$query='insert into user_info values ("'.$m.'","'.$p.'",now(),"");';
+$query='insert into user_info values ("'.$m.'","'.$p.'",now(),now(),"");';
 echo '<br/>'.$query;
 $result=$dbc->query($query);
 echo '<br/>'.gettype($result);

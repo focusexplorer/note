@@ -1,0 +1,48 @@
+html
+{
+	/* border:solid red; */
+}
+body{
+	/* border:1px dashed blue; */
+}
+
+
+#introduction{position:fixed;width:30%;left:20vw;top:20vh;}
+#auth{position:fixed;left:70vw;top:25vh;}
+
+
+#fix_head
+{
+	width:100%; 
+	
+	/* background: #e5e5e5; */
+	/* border:1px solid red; */
+}
+
+#note_book
+{
+	position:relative;
+	/* position:absolute; */
+		height:90vh;
+	
+	/* border:1px solid yellow; */
+	text-align:center;
+}
+
+
+textarea{
+	min-width:50%;
+	min-height:90vh;
+	/* border */
+	background: -webkit-gradient(linear, 0% 20%, 0% 1000%, from(#fff), to(#fff), color-stop(.1,#f3f3f3));
+	border: 1px solid #ccc;
+	/* -webkit-box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1) inset; */
+	-webkit-border-bottom-right-radius: 6px 50px;  
+	resize:none;/*去除textarea右下角几个斜线*/
+	outline:none;/*去除textarea点击边框变色的效果*/
+	
+}
+
+footer{
+	/* margin-top:5vh; */
+}

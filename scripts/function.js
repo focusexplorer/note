@@ -1,7 +1,10 @@
 
 var TOUCH_TIME="";
 var LAST_GET_TIME=0;
-var NEED_SAVE=false;
+var SAVE_CONTROL=new Object;
+SAVE_CONTROL.need_save=false;
+SAVE_CONTROL.last_edit_time=(new Date).getTime();
+var CUR_TIME=(new Date).getTime();
 
 window.onload=function()
 {
@@ -16,24 +19,33 @@ window.onload=function()
 		// document.getElementById("save").style.color="red";
 	// });	
 	ta.oninput=function(){
-		NEED_SAVE=true;
+		SAVE_CONTROL.need_save=true;
+		SAVE_CONTROL.last_edit_time=CUR_TIME;
 	};
 	ta.onpropertychange=function(){
-		NEED_SAVE=true;
+		SAVE_CONTROL.need_save=true;
+		SAVE_CONTROL.last_edit_time=CUR_TIME;
 	};
 	
 	ta.onblur=fsave;//save when save textarea
 	document.getElementsByTagName("body")[0].onbeforeunload=fsave;//save when close the web
-	setInterval(fsave,10000);
+	// setInterval(fsave,10000);//save too frequently;change saving in update_loop when no edit in last 7 seconds
 	document.getElementsByTagName("body")[0].onpageshow=fget;//called when come back from a link
 	// document.getElementsByTagName("body")[0].onfocus=fget;//add get in case of someone edit the content from somewhere else
 	
-	setInterval(update,5000);
+	setInterval(update,1000);
 }
 window.onfocus=fget;//add get in case of someone edit the content from somewhere else
 
 function update()
 {
+	CUR_TIME=(new Date).getTime();
+	//auto save  7 seconds after last_edit_time;
+	if(CUR_TIME-SAVE_CONTROL.last_edit_time>=7000)
+	{
+		fsave();
+	}
+	
 	if(navigator.onLine)
 	{
 		document.getElementById('online_flag').style.visibility="hidden";
@@ -44,14 +56,13 @@ function update()
 }
 function fget()
 {
-	//avoid too frequently get
-	var now=(new Date()).getTime();
-	if(now-LAST_GET_TIME<5000)
+	//avoid too frequently get=
+	if(CUR_TIME-LAST_GET_TIME<=7000)
 	{
-		console.log("too frequently, last_get_time:",LAST_GET_TIME," now:",now);
+		console.log("too frequently, last_get_time:",LAST_GET_TIME," now:",CUR_TIME);
 		return;
 	}
-	LAST_GET_TIME=now;
+	LAST_GET_TIME=CUR_TIME;
 		
 		
 	var xmlhttp=get_xmlhttp();
@@ -89,7 +100,7 @@ function fget()
 }
 function fsave()
 {
-	if(!NEED_SAVE)
+	if(!SAVE_CONTROL.need_save)
 	{
 		// console.log("has saved, no need to save again");
 		return ;
@@ -122,7 +133,7 @@ function fsave()
 				TOUCH_TIME=t.push_data_rsp.touch_time;
 				// var b=document.getElementById("save");
 				// b.style.color="green";
-				NEED_SAVE=false;
+				SAVE_CONTROL.need_save=false;
 			}
 			else{
 				// document.getElementById("save").style.color='red';
