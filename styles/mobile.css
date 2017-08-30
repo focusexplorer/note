@@ -11,9 +11,6 @@ body{
 #auth{position:fixed;left:70vw;top:25vh;}
 
 
-
-/* #nav_info{border:1px solid red} */
-/* #nav_info_mobile{border:1px solid red} */
 #fix_head
 {
 	width:100%; 
@@ -34,12 +31,13 @@ body{
 
 
 #whole_txt{
-	width:53%;
-	min-height:89vh;
+	width:100%;
+	min-height:83vh;
 	display:inline-block;
 
-	background: -webkit-gradient(linear, 0% 20%, 0% 1000%, from(#fff), to(#fff), color-stop(.1,#f3f3f3));
 	border: 1px solid #ccc;
+	margin:0;
+	background: -webkit-gradient(linear, 0% 20%, 0% 1000%, from(#fff), to(#fff), color-stop(.1,#f3f3f3));
 	/* -webkit-box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1) inset; */
 	-webkit-border-bottom-right-radius: 6px 50px;  
 	resize:none;/*去除textarea右下角几个斜线*/
@@ -53,3 +51,6 @@ footer{
 	/* margin-top:5vh; */
 }
 
+
+/********************************************************************/
+#whole_txt{font-size:50px;}

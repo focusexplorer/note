@@ -1,7 +1,9 @@
 <html>
 <head id="head">
 	<meta charset="utf-8"></meta>
-	<link rel="stylesheet" href="styles/main.css" type="text/css">
+	<link rel="stylesheet" media="all and (min-device-width: 600px)" href="styles/main.css" type="text/css">
+    <link rel="stylesheet" media="all and (max-device-width: 600px) and (orientation:portrait)" href="styles/mobile.css" />
+    <link rel="stylesheet" media="all and (max-device-width: 600px) and (orientation:landscape)" href="styles/mobile.css" />
 	<script src="scripts/conf.js" type="text/javascript"></script>
 	<script src="scripts/function.js" type="text/javascript"></script>
 	<script language="javascript" type="text/javascript"> 
@@ -16,13 +18,16 @@
 			<a href="authentication/login.html">登陆</a> |
 			<a href="authentication/logout.php">退出</a> 
 		</nav>
+		<!-- <nav id="nav_info_mobile"> -->
+			<!-- <a href="../../myhomepage/index.html"><img src="images/home.png"</a>  -->
+		<!-- </nav> -->
 	</div>
 	<div>
 	</div>
 	<div id="note_book">
 		<p id='online_flag'>网络未连通</p>
 		<div >
-			<textarea id="whole_txt"></textarea>
+			<p id="whole_txt" contenteditable="true" placeholder="点击这里编辑内容"></p>
 		</div>
 	</div>
 </body>

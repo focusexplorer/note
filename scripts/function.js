@@ -8,6 +8,13 @@ var CUR_TIME=(new Date).getTime();
 
 window.onload=function()
 {
+	// if(screen.width>600)
+	// {
+		// document.getElementById('nav_info_mobile').hidden="hidden";
+	// }
+	// else{
+		// document.getElementById('nav_info').hidden="hidden";
+	// }
 	document.getElementById('online_flag').style.visibility="hidden";
 	
 	
@@ -31,7 +38,6 @@ window.onload=function()
 	document.getElementsByTagName("body")[0].onbeforeunload=fsave;//save when close the web
 	// setInterval(fsave,10000);//save too frequently;change saving in update_loop when no edit in last 7 seconds
 	document.getElementsByTagName("body")[0].onpageshow=fget;//called when come back from a link
-	// document.getElementsByTagName("body")[0].onfocus=fget;//add get in case of someone edit the content from somewhere else
 	
 	setInterval(update,1000);
 }
@@ -86,11 +92,11 @@ function fget()
 			if(r.error==null)
 			{
 				var ta=document.getElementById("whole_txt");
-				ta.value=r.get_data_rsp.text;
+				ta.innerHTML=r.get_data_rsp.text;
 				TOUCH_TIME=r.get_data_rsp.touch_time;
 			}
 			else{
-				document.getElementById("whole_txt").value=r.error;
+				document.getElementById("whole_txt").innerHTML=r.error;
 			}
 			
 		}
@@ -107,13 +113,13 @@ function fsave()
 	}
 	
 	var ta=document.getElementById("whole_txt");
-	console.log(ta.value);
+	console.log(ta.innerHTML);
 	var c=new Object();
 	c.version=VERSION;
 	c.command="cmd_push_data_req";
 	c.push_data_req=new Object();
 	c.push_data_req.touch_time=TOUCH_TIME;
-	c.push_data_req.text=ta.value;
+	c.push_data_req.text=ta.innerHTML;
 	POST_CONTENT=window.JSON.stringify(c);
 	
 	var xmlhttp=get_xmlhttp();
