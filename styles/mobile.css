@@ -7,9 +7,16 @@ body{
 }
 
 
-#introduction{position:fixed;width:30%;left:20vw;top:20vh;}
-#auth{position:fixed;left:70vw;top:25vh;}
+#introduction{width:100%;padding:100px; font-size:50px;}
+#auth{width:100%;padding:100px; font-size:60px;}
+#auth div{width:100%;}
+#auth form{width:100%;}
+#auth td{width:150px;font-size:60px;}
+#auth input{width:600px;font-size:60px;}
 
+
+#nav_info{height:0;overflow:hidden;}
+/* #nav_info_mobile{height:0px;overflow:hidden;} */
 
 #fix_head
 {
@@ -19,6 +26,7 @@ body{
 	/* border:1px solid red; */
 }
 
+#online_flag{color:red;}
 #note_book
 {
 	position:relative;

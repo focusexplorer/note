@@ -8,15 +8,8 @@ var CUR_TIME=(new Date).getTime();
 
 window.onload=function()
 {
-	// if(screen.width>600)
-	// {
-		// document.getElementById('nav_info_mobile').hidden="hidden";
-	// }
-	// else{
-		// document.getElementById('nav_info').hidden="hidden";
-	// }
-	document.getElementById('online_flag').style.visibility="hidden";
 	
+	document.getElementById('online_flag').hidden="hidden";
 	
 	var ta=document.getElementById("whole_txt");
 	// ta.addEventListener("input",function(){
@@ -37,11 +30,14 @@ window.onload=function()
 	ta.onblur=fsave;//save when save textarea
 	document.getElementsByTagName("body")[0].onbeforeunload=fsave;//save when close the web
 	// setInterval(fsave,10000);//save too frequently;change saving in update_loop when no edit in last 7 seconds
-	document.getElementsByTagName("body")[0].onpageshow=fget;//called when come back from a link
+	
+	//document.getElementsByTagName("body")[0].onpageshow=fget;//called when come back from a link
+	//window.onfocus=fget;//add get in case of someone edit the content from somewhere else
+	document.getElementById("whole_txt").onfocus=fget;//get when text_area get focused; so the last two method can be commentted;
+	fget();//get on when the page is onload
 	
 	setInterval(update,1000);
 }
-window.onfocus=fget;//add get in case of someone edit the content from somewhere else
 
 function update()
 {
@@ -54,10 +50,14 @@ function update()
 	
 	if(navigator.onLine)
 	{
-		document.getElementById('online_flag').style.visibility="hidden";
+		// document.getElementById('online_flag').style.visibility="hidden";
+		document.getElementById('online_flag').hidden="hidden";
 	}
 	else{
-		document.getElementById('online_flag').style.visibility="visible";
+		// document.getElementById('online_flag').style.visibility="visible";
+		console.log("internet is not connected");
+		var ol=document.getElementById('online_flag');
+		ol.removeAttribute("hidden");
 	}
 }
 function fget()
